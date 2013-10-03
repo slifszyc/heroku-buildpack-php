@@ -266,7 +266,9 @@ if [ -n "$COMPILE_CMD" ]; then
     for cmd in "$COMPILE_CMD"; do
         {
             echo "Running '$cmd'"
-            eval "$cmd"
+            cat > "bin/run" <<SH
+eval "$cmd"
+SH
         } | indent
     done
 fi
