@@ -252,13 +252,10 @@ touch /app/vendor/nginx/logs/access.log \
       /app/vendor/nginx/logs/error.log
 
 touch /app/vendor/php/var/log/error.log
-echo "lalalalalalalaa"
 (tail -qF -n 0 /app/vendor/nginx/logs/access.log /app/vendor/nginx/logs/error.log /app/vendor/php/var/log/*.log &)
-echo "beforelalala"
-php app/console -vvv assetic:dump --env=prod --no-debug
+
 php-fpm -p "/app/vendor/php"
-echo "afterlalala"
-php app/console -vvv assetic:dump --env=prod --no-debug
+whereis php
 nginx -p "/app/vendor/nginx" -c /app/vendor/nginx/conf/nginx.conf
 SH
 
