@@ -257,18 +257,16 @@ touch /app/vendor/php/var/log/error.log
 
 php-fpm -p "/app/vendor/php"
 nginx -p "/app/vendor/nginx" -c /app/vendor/nginx/conf/nginx.conf
-SH
-
-chmod a+x "bin/run"
 
 if [ -n "$COMPILE_CMD" ]; then
     echo "-----> Running compile commands"
     for cmd in "$COMPILE_CMD"; do
         {
             echo "Running '$cmd'"
-            cat > "bin/run" <<SH
-eval "$cmd"
-SH
+            eval "$cmd"
         } | indent
     done
 fi
+SH
+
+chmod a+x "bin/run"
