@@ -254,16 +254,11 @@ touch /app/vendor/nginx/logs/access.log \
 touch /app/vendor/php/var/log/error.log
 echo "lalalalalalalaa"
 (tail -qF -n 0 /app/vendor/nginx/logs/access.log /app/vendor/nginx/logs/error.log /app/vendor/php/var/log/*.log &)
-if [ -n "$COMPILE_CMD" ]; then
-    echo "-----> Running compile commands"
-    for cmd in "$COMPILE_CMD"; do
-        {
-            echo "Running '$cmd'"
-            eval "$cmd"
-        } | indent
-    done
-fi
+echo "beforelalala"
+php app/console -vvv assetic:dump --env=prod --no-debug
 php-fpm -p "/app/vendor/php"
+echo "afterlalala"
+php app/console -vvv assetic:dump --env=prod --no-debug
 nginx -p "/app/vendor/nginx" -c /app/vendor/nginx/conf/nginx.conf
 SH
 
